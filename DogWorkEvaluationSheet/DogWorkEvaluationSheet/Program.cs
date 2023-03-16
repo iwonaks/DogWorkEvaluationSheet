@@ -1,37 +1,31 @@
-﻿
-using DogWorkEvaluationSheet;
-
+﻿using DogWorkEvaluationSheet;
 
 Dog dog = new Dog();
 var sheet = new Sheet();
-sheet.FileSaveForDogs +=Sheet_FileSaveForDog;
-sheet.FileSaveForJudge +=Sheet_FileSaveForJudge;
 
-void Sheet_FileSaveForDog(object sender, EventArgs args)
-{
-    Console.WriteLine("Wygenerowano i zapisano karty konkursowe z wynikami dla każdego psa osobno.");
-}
+sheet.FileSave +=Sheet_FileSave;
 
-void Sheet_FileSaveForJudge(object sender, EventArgs args)
+void Sheet_FileSave(object sender, EventArgs args)
 {
-    Console.WriteLine("Zapisano karty konkursowe psów w jednym pliku.");
+    Console.WriteLine("Wygenerowano i zapisano karty konkursowe z wynikami dla każdego psa osobno.\nZapisano karty konkursowe psów w jednym pliku.");
 }
 
 Console.WriteLine("Witaj w programie genrującym karty zawodników z wynikami przeprowadzonego konkursu");
 Console.WriteLine("---------------------------------------------------------------------------------");
+
 while (true)
 {
     dog.sumStack.Clear();
-    Console.WriteLine("Podaj informacje dotyczące psów z karty sędzieggo:\n Wybierz 1 by dodać informacje, S -  by wygenerować wyniki konursu i zapisać je w plikach");
+    Console.WriteLine("Podaj informacje dotyczące psów z karty sędzieggo:\nWybierz 1 by dodać informacje o wszystkich psach uczestniczących w konkursach, \nS -  by wygenerować wyniki konursu, zapisać je w plikach i zakońćzyć.");
     string input = Console.ReadLine().ToUpper();
     switch (input)
     {
         case "S":
-           
+
             var listAllDogs = dog.MakeListAllDogs();
             var sheetvalue = dog.AddLocationToListAllDogs(listAllDogs);
             sheet.PrintSheet(sheetvalue);
-            
+
             break;
 
         case "1":
@@ -153,7 +147,7 @@ while (true)
                 }
                 dog.AddStay_a(stay_a);
 
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA NA UWIĘZI:");
+                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA NA UWIĘZI");
                 int stay_b;
 
                 while (true)
@@ -169,7 +163,7 @@ while (true)
                         Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
                     }
                 }
-                dog.AddStay_b(stay_b);
+                dog.AddStay_a(stay_b);
 
                 Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji WSPÓŁPRACA Z PRZEWODNIKIEM:");
                 int cooperation;

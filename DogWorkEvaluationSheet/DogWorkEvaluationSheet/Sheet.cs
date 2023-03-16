@@ -14,15 +14,14 @@ namespace DogWorkEvaluationSheet
         }
 
         public delegate void FeedbakToMakeSheet(Object sender, EventArgs args);
-        public event FeedbakToMakeSheet FileSaveForDogs;
-        public event FeedbakToMakeSheet FileSaveForJudge;
+        public event FeedbakToMakeSheet FileSave;
 
         public void PrintSheet(List<Dog> dogs)
         {
             foreach (var dog in dogs)
             {
-                var fileSheetDog = $"{dog.Name}.txt";
-                var fileSheetAllDogs = "fileSheetAllDogs.txt";
+                var fileSheetDog = $"File/{dog.Name}.txt";
+                var fileSheetAllDogs = "File/AllDogsInOneFile.txt";
                 string time = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
 
                 using (var writer = File.AppendText(fileSheetDog))
@@ -48,11 +47,6 @@ namespace DogWorkEvaluationSheet
                     writer.WriteLine($"----------------------------------------");
                 }
 
-                if(FileSaveForDogs!= null)
-                {
-                    FileSaveForDogs(this, new EventArgs());
-                }
-
                 using (var writer = File.AppendText(fileSheetAllDogs))
                 {
                     writer.WriteLine($"Imię psa: {dog.Name}");
@@ -75,11 +69,11 @@ namespace DogWorkEvaluationSheet
                     writer.WriteLine("Aktualny czas:" + time);
                     writer.WriteLine($"----------------------------------------");
                 }
+            }
 
-                if (FileSaveForJudge!= null)
-                {
-                    FileSaveForJudge(this, new EventArgs());
-                }
+            if (FileSave!= null)
+            {
+                FileSave(this, new EventArgs());
             }
         }
     }

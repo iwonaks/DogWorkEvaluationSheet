@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DogWorkEvaluationSheet
 {
-    public abstract class DogBase
+    public abstract class DogBase : IDog
     {       
         public int Age { get; private set; }
         public string Sex { get; private set; }
@@ -25,7 +25,6 @@ namespace DogWorkEvaluationSheet
         {
 
         }
-
         public abstract void AddName(string name);
         public abstract void AddOwner(string owner);
         public abstract void AddAge(int age);
@@ -41,9 +40,5 @@ namespace DogWorkEvaluationSheet
         public abstract List<Dog> MakeListAllDogs();
         public abstract IEnumerable<int> LocationFinder(List<Dog> dogs);
         public abstract List<Dog> AddLocationToListAllDogs(List<Dog> dogs);
-
-        //public delegate void FeedbakToMakeSheet(Object sender, EventArgs args);
-
-        //public event FeedbakToMakeSheet FileSave;
     }
 }

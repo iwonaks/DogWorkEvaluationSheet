@@ -55,7 +55,7 @@ namespace DogWorkEvaluationSheet
             {
                 if (item == name)
                 {
-                    throw new Exception("Nie może być dwóch psów o tym samym imieniu");
+                    throw new Exception("Nie może być dwóch psów o tym samym imieniu, popraw.");
                 }
                 else
                 {
@@ -81,7 +81,7 @@ namespace DogWorkEvaluationSheet
             }
             else
             {
-                throw new Exception("Błędne informacje");
+                throw new Exception("Błędne informacje, F - suka, M - samiec.");
             }
         }
 
@@ -152,25 +152,12 @@ namespace DogWorkEvaluationSheet
             {
                 dogs.Add(new Dog { Name = names[i], Owner = owners[i], Age = ages[i], Sex = sexs[i], Work = works[i], Cooperation = cooperations[i], Behavior = behaviors[i], Stay_a = stays_a[i], Stay_b = stays_b[i], Sum = sumdegrees[i], GradeOfVictory = gradesOfVictory[i] });
             }
-            return dogs;
-            
+            return dogs;   
         }
+
         public override List<Dog> AddLocationToListAllDogs(List<Dog> dogs)
         {
-            dogs.Sort((a, b) =>
-            {
-                int result = b.Sum.CompareTo(a.Sum);
-                if (result == 0)
-                {
-                    result = a.Age.CompareTo(b.Age);
-                    if (result == 0)
-                    {
-                        result = a.Sex.CompareTo(b.Sex);
-                    }
-                }
-                return result;
-
-            });
+            dogs.Sort(DogComparer);
 
             IEnumerable<int> location = LocationFinder(dogs);
 
@@ -184,14 +171,31 @@ namespace DogWorkEvaluationSheet
             foreach (var dog in dogs)
             {
                 Console.WriteLine("Wykaz psów wg zajętego miejsca:");
-                Console.WriteLine("{0}, wiek: {1}, płeć: {2}, suma punktów: {3}, Lokata: {4} miejsce, Dyplom stopnia: {5}", dog.Name, dog.Age, dog.Sex, dog.Sum, dog.Location, dog.GradeOfVictory);
+                Console.WriteLine("Lokata: {0}, Imię psa: {1}, Wiek: {2}, Płeć: {3}, Suma punktów: {4}, Dyplom stopnia: {5}", dog.Location, dog.Name, dog.Age, dog.Sex, dog.Sum, dog.GradeOfVictory);
+                Console.WriteLine("---------------------------------------------------------------------------------");
             }
             return dogs;
+        }
+
+        private static int DogComparer(Dog a, Dog b)
+        {
+            int result = b.Sum.CompareTo(a.Sum);
+            if (result == 0)
+            {
+                result = a.Age.CompareTo(b.Age);
+                if (result == 0)
+                {
+                    result = a.Sex.CompareTo(b.Sex);
+                }
+            }
+            return result;
         }
 
         public override IEnumerable<int> LocationFinder(List<Dog> dogs)
         {
             int location = 1;
+            int numberLocation = 1;
+
             int previousSum = int.MaxValue;
             int previousAge = int.MaxValue;
             string previousSex = "";
@@ -201,12 +205,22 @@ namespace DogWorkEvaluationSheet
                 if (dog.Sum == previousSum && dog.Age == previousAge && dog.Sex == previousSex)
                 {
                     location--;
+                    
                 }
+                else
+                {
+                    if (location!=numberLocation)
+                    {
+                        location= numberLocation;
+                    }
+                }
+                yield return location;
                 previousSum = dog.Sum;
                 previousAge = dog.Age;
                 previousSex = dog.Sex;
-                yield return location;
                 location++;
+                numberLocation++;
+               
             }
         }
     }
