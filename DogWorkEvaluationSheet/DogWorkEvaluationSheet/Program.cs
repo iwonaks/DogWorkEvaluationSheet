@@ -16,18 +16,10 @@ Console.WriteLine("-------------------------------------------------------------
 while (true)
 {
     dog.sumStack.Clear();
-    Console.WriteLine("Podaj informacje dotyczące psów z karty sędzieggo:\nWybierz 1 by dodać informacje o wszystkich psach uczestniczących w konkursach, \nS -  by wygenerować wyniki konursu, zapisać je w plikach i zakońćzyć.");
+    Console.WriteLine("Podaj informacje dotyczące psów z karty sędzieggo:\nWybierz 1 by dodać informacje o wszystkich psach uczestniczących w konkursach, \nS -  by wygenerować wyniki konursu, zapisać je w plikach, \nQ - by zamknąć program");
     string input = Console.ReadLine().ToUpper();
     switch (input)
-    {
-        case "S":
-
-            var listAllDogs = dog.MakeListAllDogs();
-            var sheetvalue = dog.AddLocationToListAllDogs(listAllDogs);
-            sheet.PrintSheet(sheetvalue);
-
-            break;
-
+    { 
         case "1":
             {
                 string name;
@@ -163,7 +155,7 @@ while (true)
                         Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
                     }
                 }
-                dog.AddStay_a(stay_b);
+                dog.AddStay_b(stay_b);
 
                 Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji WSPÓŁPRACA Z PRZEWODNIKIEM:");
                 int cooperation;
@@ -184,8 +176,23 @@ while (true)
                 dog.AddCooperation(cooperation);
 
                 dog.GetSumAndGradeOfVictoryList();
+
                 break;
             }
+
+        case "S":
+
+            var listAllDogs = dog.MakeListAllDogs();
+            var sheetvalue = dog.AddLocationToListAllDogs(listAllDogs);
+            sheet.PrintSheet(sheetvalue);
+
+            break;
+
+        case "Q":
+
+            Environment.Exit(0);
+
+            break;
     }
 }
 
