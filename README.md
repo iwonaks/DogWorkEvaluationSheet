@@ -5,7 +5,7 @@ Net7.0
 Opis: 
 Program służy do zapisu wyników konkursu psów myśliwskich wraz ze statystykami w postaci tzw. Karty zawodnika.
 Karta zawodnika z danymi psa i wynikami zapisywana jest w pliku o nazwie = imieniu psa oraz w pliku zbiorczym. Zapisywana jest data.
-![Przykładowa karta](https://github.com/iwonaks/File/blob/main/karta.png)
+![Przykładowa karta](./images/karta.png)
 
 
 Logika programu jest zgodna z regulaminem konkursu i obejmuje następujące zasady:
