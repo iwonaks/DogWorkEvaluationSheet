@@ -1,9 +1,8 @@
 ﻿using DogWorkEvaluationSheet;
 
 Dog dog = new Dog();
-var sheet = new Sheet();
 
-sheet.FileSave +=Sheet_FileSave;
+//sheet.FileSave +=Sheet_FileSave;
 
 void Sheet_FileSave(object sender, EventArgs args)
 {
@@ -14,8 +13,7 @@ Console.WriteLine("Witaj w programie genrującym karty zawodników z wynikami pr
 Console.WriteLine("---------------------------------------------------------------------------------");
 
 while (true)
-{
-    dog.sumStack.Clear();
+{ 
     Console.WriteLine("Podaj informacje dotyczące psów z karty sędzieggo:\nWybierz 1 by dodać informacje o wszystkich psach uczestniczących w konkursach, \nS -  by wygenerować wyniki konursu, zapisać je w plikach, \nQ - by zamknąć program");
     string input = Console.ReadLine().ToUpper();
     switch (input)
@@ -40,7 +38,6 @@ while (true)
                         Console.WriteLine(ex);
                     }
                 }
-
 
                 Console.WriteLine("Podaj imię i nazwisko właściciela");
                 string owner = CheckIsNullOrEmpty();
@@ -137,7 +134,7 @@ while (true)
                         Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
                     }
                 }
-                dog.AddStay_a(stay_a);
+                dog.AddStay_A(stay_a);
 
                 Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA NA UWIĘZI");
                 int stay_b;
@@ -155,7 +152,7 @@ while (true)
                         Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
                     }
                 }
-                dog.AddStay_b(stay_b);
+                dog.AddStay_B(stay_b);
 
                 Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji WSPÓŁPRACA Z PRZEWODNIKIEM:");
                 int cooperation;
@@ -174,17 +171,12 @@ while (true)
                     }
                 }
                 dog.AddCooperation(cooperation);
-
-                dog.GetSumAndGradeOfVictoryList();
-
                 break;
             }
 
         case "S":
-
-            var listAllDogs = dog.MakeListAllDogs();
-            var sheetvalue = dog.AddLocationToListAllDogs(listAllDogs);
-            sheet.PrintSheet(sheetvalue);
+                        
+            dog.PrintSheet();
 
             break;
 
@@ -199,12 +191,12 @@ while (true)
 static string CheckIsNullOrEmpty()
 {
     string input = Console.ReadLine();
+
     while (String.IsNullOrEmpty(input))
     {
         Console.WriteLine("Podaj odpowiednią wartość");
         input = Console.ReadLine();
     }
-
     return input;
 }
 
@@ -214,11 +206,11 @@ static int CheckIsNullOrEmptyAndIntParse()
     {
         string input = Console.ReadLine();
         var resultInt = Int32.TryParse(input, out int result);
+
         if (!resultInt)
         {
             Console.WriteLine("Podaj liczbę");
         }
-
         else
         {
             return result;

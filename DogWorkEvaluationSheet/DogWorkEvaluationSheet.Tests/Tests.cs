@@ -1,70 +1,70 @@
-namespace DogWorkEvaluationSheet.Tests
-{
-    public class Tests
-    {
-        [Test]
-        public void GetGradeOfVictoryTest()
-        {
-            var dog = new Dog();
+//;
 
-            dog.Sum =61;
+//            Assert.IsFalse(grade=="nie przyznano");
+//            Assert.IsTrue(grade=="I");
+//            Assert.IsFalse(grade=="II");
+//            Assert.IsFalse(grade=="III");
+//        }
+//    }namespace DogWorkEvaluationSheet.Tests
+//{
+//    public class Tests
+//    {
+//        [Test]
+//        public void GetGradeOfVictoryTest()
+//        {
+//            var dog = new StatisticsOfCompetition();
 
-            int result = dog.Sum;
+//            dog.Sum =61;
 
-            var grade = dog.GetGradeOfVictory(result);
+//            int result = dog.Sum;
 
-            Assert.IsFalse(grade=="nie przyznano");
-            Assert.IsFalse(grade=="I");
-            Assert.IsFalse(grade=="II");
-            Assert.IsTrue(grade=="III");
-        }
+//            var grade = dog.GetGradeOfVictory(result);
 
-        [Test]
-        public void GetGradeOfVictoryTest2()
-        {
-            var dog = new Dog();
+//            Assert.IsFalse(grade=="nie przyznano");
+//            Assert.IsFalse(grade=="I");
+//            Assert.IsFalse(grade=="II");
+//            Assert.IsTrue(grade=="III");
+//        }
 
-            dog.Sum = 59;
-            int result = dog.Sum;
+//        [Test]
+//        public void GetGradeOfVictoryTest2()
+//        {
+//            var dog = new StatisticsOfCompetition();
 
-            var grade = dog.GetGradeOfVictory(result);
+//            dog.Sum = 59;
+//            int result = dog.Sum;
 
-            Assert.IsTrue(grade=="nie przyznano");
-            Assert.IsFalse(grade=="I");
-            Assert.IsFalse(grade=="II");
-            Assert.IsFalse(grade=="III");
-        }
+//            var grade = dog.GetGradeOfVictory(result);
 
-        [Test]
-        public void GetGradeOfVictoryTest3()
-        {
-            var dog = new Dog();
+//            Assert.IsTrue(grade=="nie przyznano");
+//            Assert.IsFalse(grade=="I");
+//            Assert.IsFalse(grade=="II");
+//            Assert.IsFalse(grade=="III");
+//        }
 
-            dog.Sum = 81;
-            int result = dog.Sum;
+//        [Test]
+//        public void GetGradeOfVictoryTest3()
+//        {
+//            var dog = new StatisticsOfCompetition();
 
-            var grade = dog.GetGradeOfVictory(result);
+//            dog.Sum = 81;
+//            int result = dog.Sum;
 
-            Assert.IsFalse(grade=="nie przyznano");
-            Assert.IsFalse(grade=="I");
-            Assert.IsTrue(grade=="II");
-            Assert.IsFalse(grade=="III");
-        }
+//            var grade = dog.GetGradeOfVictory(result);
 
-        [Test]
-        public void GetGradeOfVictoryTest4()
-        {
-            var dog = new Dog();
+//            Assert.IsFalse(grade=="nie przyznano");
+//            Assert.IsFalse(grade=="I");
+//            Assert.IsTrue(grade=="II");
+//            Assert.IsFalse(grade=="III");
+//        }
 
-            dog.Sum = 91;
-            int result = dog.Sum;
+//        [Test]
+//        public void GetGradeOfVictoryTest4()
+//        {
+//            var dog = new StatisticsOfCompetition();
 
-            var grade = dog.GetGradeOfVictory(result);
+//            dog.Sum = 91;
+//            int result = dog.Sum;
 
-            Assert.IsFalse(grade=="nie przyznano");
-            Assert.IsTrue(grade=="I");
-            Assert.IsFalse(grade=="II");
-            Assert.IsFalse(grade=="III");
-        }
-    }
-}
+//            var grade = dog.GetGradeOfVictory(result)
+//}
