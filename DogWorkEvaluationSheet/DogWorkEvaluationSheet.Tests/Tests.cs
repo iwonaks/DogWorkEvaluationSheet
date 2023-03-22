@@ -5,13 +5,14 @@ namespace DogWorkEvaluationSheet.Tests
         [Test]
         public void GetGradeOfVictoryTest1()
         {
-            var stat = new Statistics();
-
-            stat.Sum =59;
+            var stat = new Statistics
+            {
+                Sum =59
+            };
 
             int result = stat.Sum;
 
-            var grade = stat.GetGradeOfVictory(result);
+            var grade = Statistics.GetGradeOfVictory(result);
 
             Assert.IsTrue(grade=="nie przyznano");
             Assert.IsFalse(grade=="I");
@@ -27,7 +28,7 @@ namespace DogWorkEvaluationSheet.Tests
 
             int result = stat.Sum;
 
-            var grade = stat.GetGradeOfVictory(result);
+            var grade = Statistics.GetGradeOfVictory(result);
 
             Assert.IsFalse(grade=="nie przyznano");
             Assert.IsFalse(grade=="I");
@@ -37,13 +38,14 @@ namespace DogWorkEvaluationSheet.Tests
         [Test]
         public void GetGradeOfVictoryTest3()
         {
-            var stat = new Statistics();
-
-            stat.Sum =70;
+            var stat = new Statistics
+            {
+                Sum =70
+            };
 
             int result = stat.Sum;
 
-            var grade = stat.GetGradeOfVictory(result);
+            var grade = Statistics.GetGradeOfVictory(result);
 
             Assert.IsFalse(grade=="nie przyznano");
             Assert.IsFalse(grade=="I");
@@ -59,7 +61,7 @@ namespace DogWorkEvaluationSheet.Tests
 
             int result = stat.Sum;
 
-            var grade = stat.GetGradeOfVictory(result);
+            var grade = Statistics.GetGradeOfVictory(result);
 
             Assert.IsFalse(grade=="nie przyznano");
             Assert.IsTrue(grade=="I");
@@ -81,12 +83,9 @@ namespace DogWorkEvaluationSheet.Tests
             stat.Add(grade2);
             stat.Add(grade3);
             
-
             Assert.AreEqual(24, stat.Sum);
             Assert.AreEqual("nie przyznano", stat.GradeOfVictory);
                 
         }
-
-
     }
 }

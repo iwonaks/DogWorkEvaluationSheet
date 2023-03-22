@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DogWorkEvaluationSheet
+﻿namespace DogWorkEvaluationSheet
 {
     public abstract class DogBase : IDog
     {
@@ -22,9 +16,7 @@ namespace DogWorkEvaluationSheet
         {
 
         }
-        public abstract void AddName(string name);
-        public abstract void AddOwner(string owner);
-        public abstract void AddAge(int age);
+        
         public abstract void AddSex(string sex);
         public abstract void AddWork(int work);
         public abstract void AddBehavior(int behavior);

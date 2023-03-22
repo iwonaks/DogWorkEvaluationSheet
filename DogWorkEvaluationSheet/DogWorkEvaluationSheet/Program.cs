@@ -1,49 +1,31 @@
 ﻿using DogWorkEvaluationSheet;
+using System.IO;
 
-Dog dog = new Dog();
-
-//sheet.FileSave +=Sheet_FileSave;
-
-void Sheet_FileSave(object sender, EventArgs args)
-{
-    Console.WriteLine("Wygenerowano i zapisano karty konkursowe z wynikami dla każdego psa osobno.\nZapisano karty konkursowe psów w jednym pliku.");
-}
-
-Console.WriteLine("Witaj w programie genrującym karty zawodników z wynikami przeprowadzonego konkursu");
-Console.WriteLine("---------------------------------------------------------------------------------");
+Console.WriteLine("Witaj w programie genrującym kartę z wynikami przeprowadzonego konkursu w kategorii PSY TROPIĄCE");
 
 while (true)
-{ 
-    Console.WriteLine("Podaj informacje dotyczące psów z karty sędzieggo:\nWybierz 1 by dodać informacje o wszystkich psach uczestniczących w konkursach, \nS -  by wygenerować wyniki konursu, zapisać je w plikach, \nQ - by zamknąć program");
+{
+    Dog dog = new();
+
+    dog.FileSave +=Sheet_FileSave;
+
+    Console.WriteLine("---------------------------------------------------------------------------------");
+    Console.WriteLine("Wybierz:\n1 -By wprowadzić informacje dotyczące psa oraz punkty jakie uzyskał w poszczególnych konkurencjach. Karta z wynikami zapisze się automatycznie.\nQ - Zamyka program.");
     string input = Console.ReadLine().ToUpper();
     switch (input)
-    { 
+    {
         case "1":
             {
-                string name;
+
                 Console.WriteLine("Podaj imię psa:");
-                while (true)
-                {
-                    name= CheckIsNullOrEmpty();
 
-                    name = name.ToUpper();
-                    try
-                    {
-                        dog.AddName(name);
-                        break;
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex);
-                    }
-                }
+                string name = CheckIsNullOrEmpty().ToUpper();
+                dog.Name=name;
 
                 Console.WriteLine("Podaj imię i nazwisko właściciela");
-                string owner = CheckIsNullOrEmpty();
 
-                owner = owner.ToUpper();
-                dog.AddOwner(owner);
+                string owner = CheckIsNullOrEmpty().ToUpper();
+                dog.Owner = owner;
 
                 Console.WriteLine("Podaj wiek psa:");
                 int age;
@@ -61,15 +43,14 @@ while (true)
                         Console.WriteLine("Podaj wiek więszy od zera");
                     }
                 }
-                dog.AddAge(age);
+                dog.Age = age;
 
                 Console.WriteLine("Podaj płeć psa, wpisz 'F' - suka, 'M' - samiec ");
-                string sex;
 
                 while (true)
                 {
-                    sex = CheckIsNullOrEmpty();
-                    sex = sex.ToUpper();
+                    string sex = CheckIsNullOrEmpty().ToUpper();
+
                     try
                     {
                         dog.AddSex(sex);
@@ -83,6 +64,7 @@ while (true)
                 }
 
                 Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji PRACA NA OTOKU:");
+
                 int work;
 
                 while (true)
@@ -171,21 +153,21 @@ while (true)
                     }
                 }
                 dog.AddCooperation(cooperation);
+                dog.PrintSheet();
+                
+                
                 break;
             }
-
-        case "S":
-                        
-            dog.PrintSheet();
-
-            break;
 
         case "Q":
 
             Environment.Exit(0);
-
             break;
     }
+}
+static void Sheet_FileSave(object sender, EventArgs args)
+{
+    Console.WriteLine($"Zapisano kartę konkursową z wynikami w pliku.");
 }
 
 static string CheckIsNullOrEmpty()
@@ -205,7 +187,7 @@ static int CheckIsNullOrEmptyAndIntParse()
     while (true)
     {
         string input = Console.ReadLine();
-        var resultInt = Int32.TryParse(input, out int result);
+        var resultInt = int.TryParse(input, out int result);
 
         if (!resultInt)
         {

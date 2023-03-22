@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DogWorkEvaluationSheet
+﻿namespace DogWorkEvaluationSheet
 {
     internal interface IDog
     {
@@ -17,9 +11,6 @@ namespace DogWorkEvaluationSheet
         int Stay_B { get; }
         int Work { get; }
 
-        void AddName(string name);
-        void AddOwner(string owner);
-        void AddAge(int age);
         void AddSex(string sex);
         
         void AddWork(int work);
