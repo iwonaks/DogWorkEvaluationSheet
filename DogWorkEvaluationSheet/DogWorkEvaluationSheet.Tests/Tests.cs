@@ -73,8 +73,8 @@ namespace DogWorkEvaluationSheet.Tests
         {
             var stat = new Statistics();
 
-            int Sum;
-            string GradeOfVictory;
+            int Sum = 24;
+            string GradeOfVictory = "nie przyznano";
             int grade1 = 7;
             int grade2 = 8;
             int grade3 = 9;
@@ -83,8 +83,8 @@ namespace DogWorkEvaluationSheet.Tests
             stat.Add(grade2);
             stat.Add(grade3);
             
-            Assert.AreEqual(24, stat.Sum);
-            Assert.AreEqual("nie przyznano", stat.GradeOfVictory);
+            Assert.That(stat.Sum, Is.EqualTo(Sum));
+            Assert.That(stat.GradeOfVictory, Is.EqualTo(GradeOfVictory));
                 
         }
     }

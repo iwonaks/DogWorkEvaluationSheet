@@ -1,17 +1,14 @@
 ﻿namespace DogWorkEvaluationSheet
 {
-    internal interface IDog
+     interface IDog
     {
-        int Age { get; }
-        string Name { get; }
-        string Owner { get; }
-        int Behavior { get; }
-        int Cooperation { get; }
-        int Stay_A { get; }
-        int Stay_B { get; }
-        int Work { get; }
-
-        void AddSex(string sex);
+        string Name { get; set; }
+        
+        int Behavior { get; set; }
+        int Cooperation { get; set; }
+        int Stay_A { get; set; }
+        int Stay_B { get; set; }
+        int Work { get; set; }
         
         void AddWork(int work);
         void AddBehavior(int behavior);
