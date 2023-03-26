@@ -9,18 +9,23 @@ using System.Xml.Linq;
 
 namespace DogWorkEvaluationSheet
 {
-    public class Dog_ResultInFile : DogBase
+    public class DogInFile : DogBase
     {
         public delegate void FeedbakToMakeSheet(Object sender, EventArgs args);
 
         public event FeedbakToMakeSheet? FileWithSheetSave;
         public event FeedbakToMakeSheet? FileWithGradesSave;
 
-        public Dog_ResultInFile()
+        public DogInFile(string name)
         {
-
+            this.Name = name;
         }
-        public override void AddSex(string sex)
+        public DogInFile()
+        {
+            
+        }
+
+        public void AddSex(string sex)
         {
             if (sex=="F" || sex=="M")
             {
@@ -38,17 +43,18 @@ namespace DogWorkEvaluationSheet
             {
                 writer.WriteLine(Behavior);
             }
-
             EventFileWithGrades();
         }
         public override void AddCooperation(int grade)
         {
             Cooperation = grade*4;
+
+            File.WriteAllText($"{Name}_grades.txt", string.Empty);
+
             using (var writer = File.AppendText($"{Name}_grades.txt"))
             {
                 writer.WriteLine(Cooperation);
             }
-
             EventFileWithGrades();
         }
 
@@ -59,7 +65,6 @@ namespace DogWorkEvaluationSheet
             {
                 writer.WriteLine(Stay_A);
             }
-
             EventFileWithGrades();
         }
 
@@ -70,7 +75,6 @@ namespace DogWorkEvaluationSheet
             {
                 writer.WriteLine(Stay_B);
             }
-
             EventFileWithGrades();
         }
 
@@ -78,13 +82,10 @@ namespace DogWorkEvaluationSheet
         {
             this.Work = grade*10;
 
-            File.WriteAllText($"{Name}_grades.txt", string.Empty);
-
             using (var writer = File.AppendText($"{Name}_grades.txt"))
             {
                 writer.WriteLine(Work);
             }
-
             EventFileWithGrades();
         }
 
@@ -109,16 +110,6 @@ namespace DogWorkEvaluationSheet
             return grades;
         }
 
-        public Statistics GetStatistics(List<int> grades)
-        {
-            var statistics = new Statistics();
-            foreach (var grade in grades)
-            {
-                statistics.Add(grade);
-            }
-            return statistics;
-        }
-
         public override Statistics GetStatistics()
         {
             var gradesInFile = ReadGradesFromFile();
@@ -139,34 +130,59 @@ namespace DogWorkEvaluationSheet
             string time = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
 
             using var writer = File.AppendText(fileSheetDog);
-            writer.WriteLine($"Imię psa: {Name}");
-            writer.WriteLine($"Wiek psa: {Age}");
-            writer.WriteLine($"Płeć psa: {Sex}");
-            writer.WriteLine($"Właściciel psa: {Owner}");
-            writer.WriteLine();
 
-            writer.WriteLine("WYNIKI W POSZCZEGÓLNYCH KONKURENCJACH:");
-            writer.WriteLine($"Współpraca: {Cooperation}");
-            writer.WriteLine($"Zachowanie przy zwierzynie: {Behavior}");
-            writer.WriteLine($"Praca na otoku: {Work}");
-            writer.WriteLine($"Odłożenie luzem: {Stay_A}");
-            writer.WriteLine($"Odłożenie na uwięzi: {Stay_B}");
-            writer.WriteLine();
+            string lines =
 
-            writer.WriteLine("PODSUMOWANIE:");
-            writer.WriteLine($"Suma uzyskanych punktów w konkursie: {statisticsDog.Sum}");
-            writer.WriteLine($"Dyplom stopnia: {statisticsDog.GradeOfVictory} ");
-            writer.WriteLine("Lokata: .............(uzupełnia sędzia)");
-            writer.WriteLine();
+            $"\tImię psa: {Name}\n" +
+            $"\tWiek psa: {Age}\n" +
+            $"\tPłeć psa: {Sex}\n" +
+            $"\tWłaściciel psa: {Owner}\n" +
+            "\n" +
+            "\tWYNIKI W POSZCZEGÓLNYCH KONKURENCJACH:\n" +
+            $"\tWspółpraca: {Cooperation}\n" +
+            $"\tZachowanie przy zwierzynie: {Behavior}\n" +
+            $"\tPraca na otoku: {Work}\n" +
+            $"\tOdłożenie luzem: {Stay_A}\n" +
+            $"\tOdłożenie na uwięzi: {Stay_B}\n" +
+            "\n" +
+            "\tPODSUMOWANIE:\n" +
+            $"\tSuma uzyskanych punktów w konkursie: {statisticsDog.Sum}\n" +
+            $"\tDyplom stopnia: {statisticsDog.GradeOfVictory}\n" +
+            "\tLokata: .............(uzupełnia sędzia)\n" +
+            "\n" +
+            $"\tAktualny czas: {time}\n" +
+            "\tt------------------\n";
 
-            writer.WriteLine("Aktualny czas:" + time);
-            writer.WriteLine($"----------------------------------------");
-
+            Console.WriteLine(lines);
+            writer.WriteLine(lines);
+            
             if (FileWithSheetSave!=null)
             {
                 FileWithSheetSave(this, new EventArgs());
             }
         }
+
+        public void PrintSheetFromFile()
+        {
+            var statisticsDog = GetStatistics();
+
+            var grades = ReadGradesFromFile();
+
+            Console.WriteLine($"\tImię psa: {Name}\n" +
+            $"\n" +
+            "\tWYNIKI W POSZCZEGÓLNYCH KONKURENCJACH:\n" +
+            $"\tWspółpraca: {grades[0]}\n" +
+            $"\tZachowanie przy zwierzynie: {grades[1]}\n" +
+            $"\tPraca na otoku: {grades[2]}\n" +
+            $"\tOdłożenie luzem: {grades[3]}\n" +
+            $"\tOdłożenie na uwięzi: {grades[4]}\n" +
+            $"\n" +
+            "\tPODSUMOWANIE:\n" +
+            $"\tSuma uzyskanych punktów w konkursie: {statisticsDog.Sum}\n" +
+            $"\tDyplom stopnia: {statisticsDog.GradeOfVictory}\n" +
+            "\tLokata: .............(uzupełnia sędzia)");
+        }
+
         private void EventFileWithGrades()
         {
             if (FileWithGradesSave!= null)

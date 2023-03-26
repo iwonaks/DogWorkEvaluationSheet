@@ -2,7 +2,7 @@
 
 namespace DogWorkEvaluationSheet
 {
-    public class Dog_ResultSymulation : DogBase
+    public class DogInMemory : DogBase
     {
         public List<int> grades = new List<int>();
        
@@ -13,7 +13,7 @@ namespace DogWorkEvaluationSheet
         public new int Stay_B { get; set; }
         public new int Work { get; set; }
 
-        public Dog_ResultSymulation()
+        public DogInMemory()
         {
 
         }
@@ -75,11 +75,6 @@ namespace DogWorkEvaluationSheet
             Console.WriteLine($"Suma uzyskanych punktów w konkursie:{statisticsDog.Sum}");
             Console.WriteLine($"Dyplom stopnia: {statisticsDog.GradeOfVictory} ");
             Console.WriteLine("Lokata: .............(uzupełnia sędzia)");
-        }
-
-        public override void AddSex(string sex)
-        {
-            throw new NotImplementedException();
         }
     }
 }

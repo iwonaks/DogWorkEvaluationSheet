@@ -1,15 +1,17 @@
 ﻿using DogWorkEvaluationSheet;
 using System.IO;
+using System.Runtime.CompilerServices;
 
-Console.WriteLine("Witaj w programie genrującym kartę z wynikami przeprowadzonego konkursu w kategorii PSY TROPIĄCE");
+Console.WriteLine("\tWitaj w programie genrującym kartę z wynikami przeprowadzonego konkursu w kategorii PSY TROPIĄCE");
 
 while (true)
 {
-    Console.WriteLine("----------------------------------------------------------");
-    Console.WriteLine("Co chcesz zrobić?:\n" +
-        "1 - Stworzyć Kartę Konkursową z wynikami psa i zapisać ją w pliku.\n" +
-        "2 - Zobaczyć statystyki psa na ekranie, bez zapisu do pliku.\n" +
-        "Q - Zamyka program.");
+    Console.WriteLine("\t------------------\n" +
+    "\tCo chcesz zrobić?:\n" +
+    "\t1 - Stworzyć Kartę Konkursową z wynikami psa i zapisać ją w pliku.\n" +
+    "\t2 - Zobaczyć statystyki psa na ekranie, bez zapisu do pliku.\n" +
+    "\t3 - Odczytać statystyki psa o podanym imieniu.\n" +
+    "\tQ - Zamyka program.");
 
     string input = CheckIsNullOrEmpty().ToUpper();
 
@@ -17,7 +19,7 @@ while (true)
     {
         case "1":
             {
-                Dog_ResultInFile dog = new Dog_ResultInFile();
+                DogInFile dog = new DogInFile();
 
                 dog.FileWithSheetSave +=Sheet_FileSave;
                 dog.FileWithGradesSave +=Grades_FileSave;
@@ -43,10 +45,8 @@ while (true)
                     {
                         break;
                     }
-                    else
-                    {
-                        Console.WriteLine("Podaj wiek więszy od zera");
-                    }
+
+                    Console.WriteLine("Podaj wiek więszy od zera");
                 }
                 dog.Age = age;
 
@@ -68,202 +68,39 @@ while (true)
                     }
                 }
 
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji PRACA NA OTOKU:");
-
-                int work;
-
-                while (true)
-                {
-                    work = CheckIsNullOrEmptyAndIntParse();
-
-                    if (work >= 0 && work <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddWork(work);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ZACHOWANIE PRZY ZWIERZYNIE:");
-                int behavior;
-
-                while (true)
-                {
-                    behavior = CheckIsNullOrEmptyAndIntParse();
-
-                    if (behavior >= 0 && behavior <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddBehavior(behavior);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA LUZEM:");
-                int stay_a;
-
-                while (true)
-                {
-                    stay_a = CheckIsNullOrEmptyAndIntParse();
-
-                    if (stay_a >= 0 && stay_a <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddStay_A(stay_a);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA NA UWIĘZI");
-                int stay_b;
-
-                while (true)
-                {
-                    stay_b = CheckIsNullOrEmptyAndIntParse();
-
-                    if (stay_b >= 0 && stay_b <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddStay_B(stay_b);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji WSPÓŁPRACA Z PRZEWODNIKIEM:");
-                int cooperation;
-
-                while (true)
-                {
-                    cooperation = CheckIsNullOrEmptyAndIntParse();
-
-                    if (cooperation >= 0 && cooperation <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddCooperation(cooperation);
-                dog.PrintSheet();
+                AddAllGrades(dog);
 
                 break;
             }
-
         case "2":
-            { 
-                Dog_ResultSymulation dog = new Dog_ResultSymulation();
+            {
+                DogInMemory dog = new DogInMemory();
 
                 Console.WriteLine("Podaj imię psa:");
 
                 string name = CheckIsNullOrEmpty().ToUpper();
                 dog.Name=name;
 
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji PRACA NA OTOKU:");
+                AddAllGrades(dog);
 
-                int work;
+                break;
+            }
 
-                while (true)
+        case "3":
+            {
+                Console.WriteLine("Podaj imię psa, którego dane chcesz odczytać:");
+
+                string name = CheckIsNullOrEmpty().ToUpper();
+                DogInFile dog = new DogInFile(name);
+
+                if ($"{name}_grades" !=null)
                 {
-                    work = CheckIsNullOrEmptyAndIntParse();
-
-                    if (work >= 0 && work <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
+                    dog.PrintSheetFromFile();
                 }
-                dog.AddWork(work);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ZACHOWANIE PRZY ZWIERZYNIE:");
-                int behavior;
-
-                while (true)
+                else
                 {
-                    behavior = CheckIsNullOrEmptyAndIntParse();
-
-                    if (behavior >= 0 && behavior <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
+                    Console.WriteLine("Nie ma w bazie psa o podanym imieniu");
                 }
-                dog.AddBehavior(behavior);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA LUZEM:");
-                int stay_a;
-
-                while (true)
-                {
-                    stay_a = CheckIsNullOrEmptyAndIntParse();
-
-                    if (stay_a >= 0 && stay_a <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddStay_A(stay_a);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA NA UWIĘZI");
-                int stay_b;
-
-                while (true)
-                {
-                    stay_b = CheckIsNullOrEmptyAndIntParse();
-
-                    if (stay_b >= 0 && stay_b <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddStay_B(stay_b);
-
-                Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji WSPÓŁPRACA Z PRZEWODNIKIEM:");
-                int cooperation;
-
-                while (true)
-                {
-                    cooperation = CheckIsNullOrEmptyAndIntParse();
-
-                    if (cooperation >= 0 && cooperation <=4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
-                    }
-                }
-                dog.AddCooperation(cooperation);
-                dog.PrintSheet();
-
                 break;
             }
 
@@ -276,7 +113,7 @@ while (true)
 }
 static void Sheet_FileSave(object sender, EventArgs args)
 {
-    Console.WriteLine($"Zapisano kartę konkursową z wynikami w pliku.");
+    Console.WriteLine("\tZapisano kartę konkursową z wynikami w pliku.");
 }
 
 static void Grades_FileSave(object sender, EventArgs args)
@@ -291,7 +128,6 @@ static string CheckIsNullOrEmpty()
     while (String.IsNullOrEmpty(input))
     {
         Console.WriteLine("Podaj odpowiednią wartość");
-        //input = Console.ReadLine();
     }
     return input;
 }
@@ -307,9 +143,92 @@ static int CheckIsNullOrEmptyAndIntParse()
         {
             Console.WriteLine("Podaj liczbę");
         }
-        else
-        {
-            return result;
-        }
+        return result;
     }
+}
+
+static void AddAllGrades(IDog dog)
+{
+    Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji WSPÓŁPRACA Z PRZEWODNIKIEM:");
+    int cooperation;
+
+    while (true)
+    {
+        cooperation = CheckIsNullOrEmptyAndIntParse();
+
+        if (cooperation >= 0 && cooperation <=4)
+        {
+            break;
+        }
+        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
+    }
+
+    dog.AddCooperation(cooperation);
+
+    Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ZACHOWANIE PRZY ZWIERZYNIE:");
+    int behavior;
+
+    while (true)
+    {
+        behavior = CheckIsNullOrEmptyAndIntParse();
+
+        if (behavior >= 0 && behavior <=4)
+        {
+            break;
+        }
+        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
+    }
+
+    dog.AddBehavior(behavior);
+
+    Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji PRACA NA OTOKU:");
+
+    int work;
+
+    while (true)
+    {
+        work = CheckIsNullOrEmptyAndIntParse();
+
+        if (work >= 0 && work <=4)
+        {
+            break;
+        }
+        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
+    }
+
+    dog.AddWork(work);
+
+    Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA LUZEM:");
+    int stay_a;
+
+    while (true)
+    {
+        stay_a = CheckIsNullOrEmptyAndIntParse();
+
+        if (stay_a >= 0 && stay_a <=4)
+        {
+            break;
+        }
+        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
+    }
+
+    dog.AddStay_A(stay_a);
+
+    Console.WriteLine("Podaj ilość zdobytych punktów w konkurencji ODŁOŻENIE PSA NA UWIĘZI");
+    int stay_b;
+
+    while (true)
+    {
+        stay_b = CheckIsNullOrEmptyAndIntParse();
+
+        if (stay_b >= 0 && stay_b <=4)
+        {
+            break;
+        }
+        Console.WriteLine("Podaj liczbę całkowitą w zakresie od 0 do 4");
+    }
+
+    dog.AddStay_B(stay_b);
+
+    dog.PrintSheet();
 }

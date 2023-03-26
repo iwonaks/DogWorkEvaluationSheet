@@ -15,5 +15,6 @@
         void AddCooperation(int cooperation);
         void AddStay_A(int stay_a);
         void AddStay_B(int stay_b);
+        void PrintSheet();
     }
 }
