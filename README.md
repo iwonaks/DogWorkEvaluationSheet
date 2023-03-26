@@ -4,19 +4,21 @@ Net7.0
 
 # Opis: 
 Program służy do zapisu wyników konkursu psów myśliwskich wraz ze statystykami w postaci tzw. Karty zawodnika.
-Karta zawodnika z danymi psa i wynikami zapisywana jest w pliku o nazwie = imieniu psa. Zapisywana jest data.
+Karta zawodnika z danymi psa i wynikami zapisywana jest w pliku o nazwie = {imię psa}_sheet.txt. Zapisywana jest przy tym data.
+Ponowne dodanie psa o tym samym imieniu spowoduje dopisanie nowych statystyk z zachowaniem poprzednich (powstaje kolejna karta). 
+Dane do pliku zapisywane są przy udziale zapisu i odczytu danych z pliku o nazwie {imię psa}_grades.txt. W pliku pozostają tylko ostatnio wprowadzone wartości punktów z poszczególnych konkurencji konkretnego psa.
 
+Użytkownik programu ma również możliwość przeprowadzenia symulacji, uzyskanie wyniku w konkursie, przed wprowadzeniem danych do pliku (co odbywa się w pamięci komputera) i prezentowane jest jedynie na ekranie komputera.
 
-# Logika programu jest zgodna z regulaminem konkursu i obejmuje następujące zasady:
+# Logika programu jest częciowo zgodna z regulaminem konkursu i obejmuje następujące zasady:
 
-I. Pracę psów w poszczególnych konkurencjach ocenia się stopniami od „0” do „4”. Każda z konkurencji ma inną wagę.
+I. Pracę psów w poszczególnych konkurencjach ocenia się stopniami od „0” do „4”. Każda z konkurencji ma inną wagę, co zostaje  wprogramie przeliczone.
 
 II. Znalezienie sumy punktów.
 
 III. Przyznanie (albo nieprzyznanie) dyplomu Iº, IIº i IIIº, zależnie od uzyskanej ogólnej liczby punktów, odpowiednio >=90%, >=70%, >=60%.
 
-
-tego jeszcze nie ma:
+Nie ma:
 
 IV. Kolejność lokat ustala się biorąc pod uwagę:
 1. Liczbę uzyskanych punktów.
