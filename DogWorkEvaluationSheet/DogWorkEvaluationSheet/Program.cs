@@ -45,7 +45,6 @@ while (true)
                     {
                         break;
                     }
-
                     Console.WriteLine("Podaj wiek więszy od zera");
                 }
                 dog.Age = age;
@@ -69,7 +68,6 @@ while (true)
                 }
 
                 AddAllGrades(dog);
-
                 break;
             }
         case "2":
@@ -82,7 +80,6 @@ while (true)
                 dog.Name=name;
 
                 AddAllGrades(dog);
-
                 break;
             }
 
@@ -111,6 +108,7 @@ while (true)
             }
     }
 }
+
 static void Sheet_FileSave(object sender, EventArgs args)
 {
     Console.WriteLine("\tZapisano kartę konkursową z wynikami w pliku.");

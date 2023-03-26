@@ -36,6 +36,7 @@ namespace DogWorkEvaluationSheet
                 throw new Exception("Błędne informacje, F - suka, M - samiec.");
             }
         }
+
         public override void AddBehavior(int grade)
         {
             Behavior = grade*6;
@@ -45,6 +46,7 @@ namespace DogWorkEvaluationSheet
             }
             EventFileWithGrades();
         }
+
         public override void AddCooperation(int grade)
         {
             Cooperation = grade*4;

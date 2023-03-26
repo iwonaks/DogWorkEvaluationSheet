@@ -2,7 +2,6 @@
 {
     public class Statistics
     { 
-        
         public int Sum { get; set; }
         public string GradeOfVictory { get; set; }
         
